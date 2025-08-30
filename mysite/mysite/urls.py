@@ -18,6 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+def home(request):
+    return HttpResponse("""
+    <h1>Welcome to My Blog API</h1>
+    <p>Available endpoints:</p>
+    <ul>
+        <li><a href="/api/posts/">/api/posts/</a> - Blog posts</li>
+        <li><a href="/api/categories/">/api/categories/</a> - Categories</li>
+        <li><a href="/admin/">/admin/</a> - Admin panel</li>
+        <li><a href="/api/auth/register/">/api/auth/register/</a> - User registration</li>
+        <li><a href="/api/auth/login/">/api/auth/login/</a> - User login</li>
+    </ul>
+    """)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('auth_app.urls')),
