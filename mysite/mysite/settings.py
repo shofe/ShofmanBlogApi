@@ -57,8 +57,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # SQLite Database Configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'USER': 'shofman' 
+        'PASSWORD': 'tayosho@21'
+        'HOST': 'shofman.mysql.pythonanywhere-services.com'
+        'PORT': '3306'
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'use_unicode': True,
+        }
     }
 }
 
