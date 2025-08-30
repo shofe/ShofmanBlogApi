@@ -77,6 +77,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-firebase-blogapi-1756504475594.cluster-ikslh4rdsnbqsvu5nw3v4dqjj2.cloudworkstations.dev',
+    'https://*.cloudworkstations.dev',
+    'https://*.idx.dev',
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+
+
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -101,4 +113,9 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "https://8000-firebase-blogapi-1756504475594.cluster-ikslh4rdsnbqsvu5nw3v4dqjj2.cloudworkstations.dev",
+]
+
 CORS_ALLOW_ALL_ORIGINS = True
+

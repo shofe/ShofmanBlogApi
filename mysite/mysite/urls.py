@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponse
+
 def home(request):
     return HttpResponse("""
     <h1>Welcome to My Blog API</h1>
@@ -30,7 +32,9 @@ def home(request):
         <li><a href="/api/auth/login/">/api/auth/login/</a> - User login</li>
     </ul>
     """)
+
 urlpatterns = [
+    path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('api/auth/', include('auth_app.urls')),
     path('api/', include('core.urls'))
