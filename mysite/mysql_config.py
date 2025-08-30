@@ -1,0 +1,3 @@
+import mysql.connector
+from mysql.connector import DjangoMySQLConverter
+mysql.connector.connect(converter_class=DjangoMySQLConverter)
