@@ -1,59 +1,52 @@
 from django.db import models
 
 # Create your models here.
-from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Post, Category, Comment, Like
+from django.utils import timezone
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['id', 'name', 'description']
-
-class CommentSerializer(serializers.ModelSerializer):
-    author = UserSerializer(read_only=True)
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    published_date = models.DateTimeField(default=timezone.now)
+    updated_date = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=True)
+    
+    def __str__(self):
+        return self.title
     
     class Meta:
-        model = Comment
-        fields = ['id', 'post', 'author', 'content', 'created_date', 'updated_date', 'is_active']
+        ordering = ['-published_date']
 
-class LikeSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    updated_date = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
+    
+    def __str__(self):
+        return f'Comment by {self.author.username} on {self.post.title}'
     
     class Meta:
-        model = Like
-        fields = ['id', 'post', 'user', 'created_date']
+        ordering = ['-created_date']
 
-class PostSerializer(serializers.ModelSerializer):
-    author = UserSerializer(read_only=True)
-    category = CategorySerializer(read_only=True)
-    comments = CommentSerializer(many=True, read_only=True)
-    likes = LikeSerializer(many=True, read_only=True)
-    likes_count = serializers.SerializerMethodField()
-    comments_count = serializers.SerializerMethodField()
+class Like(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(default=timezone.now)
     
     class Meta:
-        model = Post
-        fields = ['id', 'title', 'content', 'author', 'category', 'published_date', 
-                 'updated_date', 'is_published', 'comments', 'likes', 'likes_count', 'comments_count']
+        unique_together = ('post', 'user')
     
-    def get_likes_count(self, obj):
-        return obj.likes.count()
-    
-    def get_comments_count(self, obj):
-        return obj.comments.count()
-
-class PostCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Post
-        fields = ['title', 'content', 'category', 'is_published']
-
-class CommentCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = ['content']
+    def __str__(self):
+        return f'{self.user.username} likes {self.post.title}'
