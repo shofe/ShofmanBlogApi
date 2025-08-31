@@ -1,6 +1,6 @@
 import os
 import sys
-path = '/home/yourusername/your-repo-name/mysite'
+path = '/home/shofman/ShofmanBlogApi/mysite'
 if path not in sys.path:
     sys.path.append(path)
 os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'
