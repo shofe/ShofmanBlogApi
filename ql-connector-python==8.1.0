@@ -1,0 +1,29 @@
+[33mcommit 4ec65c05243955623e03966e39490a0402a36a4e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: tayoshofunlayo <tayoshofunlayo@gmail.com>
+Date:   Sat Aug 30 23:23:23 2025 +0000
+
+    rcommented one mysql-connector
+
+[33mcommit 5b03b3ab636c9624c5eb9d46db24da21f3d699f4[m
+Author: tayoshofunlayo <tayoshofunlayo@gmail.com>
+Date:   Sat Aug 30 23:01:32 2025 +0000
+
+    created a file and added some files to gitignore
+
+[33mcommit 005bcf5edd65a84f945326a7a63064e4390d88bb[m
+Author: tayoshofunlayo <tayoshofunlayo@gmail.com>
+Date:   Sat Aug 30 22:47:48 2025 +0000
+
+    added mysql configuration helper file
+
+[33mcommit 1c4e5a7d1da6226c263bf1d2cf3db9c1cf3c8608[m
+Author: tayoshofunlayo <tayoshofunlayo@gmail.com>
+Date:   Sat Aug 30 22:45:03 2025 +0000
+
+    producton was added to settings for deployment
+
+[33mcommit b0eb73d65a31050a6bf03dac1d4859af3e06d3be[m
+Author: tayoshofunlayo <tayoshofunlayo@gmail.com>
+Date:   Sat Aug 30 22:35:19 2025 +0000
+
+    added mysql-connector to requirements

@@ -3,14 +3,15 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'your-secret-key-change-this-in-production'
+SECRET_KEY = 'kogd45vqcl67!h5bt+u*c0!eutoyx0xnc3^$%&dd$ah#d@&0r0'
 
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-firebase-blogapi-1756504475594.cluster-ikslh4rdsnbqsvu5nw3v4dqjj2.cloudworkstations.dev',
+    #'8000-firebase-blogapi-1756504475594.cluster-ikslh4rdsnbqsvu5nw3v4dqjj2.cloudworkstations.dev',
     'localhost',
     '127.0.0.1',
+    'shofman.pythonanywhere.com',
 ]
 
 INSTALLED_APPS = [

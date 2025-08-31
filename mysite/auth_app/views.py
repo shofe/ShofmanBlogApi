@@ -8,27 +8,14 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from .serializers import UserRegistrationSerializer
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register_user(request):
-    username = request.data.get('username')
-    password = request.data.get('password')
-    email = request.data.get('email')
-    
-    if not username or not password:
-        return Response(
-            {'error': 'Please provide both username and password'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-    
-    if User.objects.filter(username=username).exists():
-        return Response(
-            {'error': 'Username already exists'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-    
-    user = User.objects.create_user(username=username, password=password, email=email)
+    serializer = UserRegistrationSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    user = serializer.save()
     token, created = Token.objects.get_or_create(user=user)
     
     return Response({
