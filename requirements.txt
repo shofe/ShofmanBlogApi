@@ -9,4 +9,4 @@ pycodestyle==2.14.0
 sqlparse==0.4.4
 typing_extensions==4.9.0
 mysqlclient==2.1.1
-#mysql-connector-python==8.1.0
+mysql-connector-python==8.1.0
